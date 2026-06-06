@@ -9,6 +9,7 @@ import 'package:cardpulse/screens/dashboard_screen.dart';
 import 'package:cardpulse/screens/sell_card_screen.dart';
 import 'package:cardpulse/screens/wallet_screen.dart';
 import 'package:cardpulse/screens/brands_screen.dart';
+import 'package:cardpulse/screens/admin_submissions_screen.dart';
 
 final _router = GoRouter(
   initialLocation: '/login',
@@ -19,6 +20,7 @@ final _router = GoRouter(
     GoRoute(path: '/sell', builder: (_, _) => const SellCardScreen()),
     GoRoute(path: '/wallet', builder: (_, _) => const WalletScreen()),
     GoRoute(path: '/brands', builder: (_, _) => const BrandsScreen()),
+    GoRoute(path: '/admin/submissions', builder: (_, _) => const AdminSubmissionsScreen()),
   ],
 );
 

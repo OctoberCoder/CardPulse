@@ -48,6 +48,12 @@ class DashboardScreen extends ConsumerWidget {
               trailing: const Icon(Icons.chevron_right),
               onTap: () => context.go('/wallet'),
             )),
+            Card(child: ListTile(
+              leading: const Icon(Icons.admin_panel_settings, size: 32),
+              title: const Text('Admin Panel (Staff)', style: TextStyle(fontSize: 18)),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.go('/admin/submissions'),
+            )),
           ],
         ),
       ),
