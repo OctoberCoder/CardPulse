@@ -10,6 +10,7 @@ from app.models.user import User
 from app.schemas.card import CardSubmissionResponse
 from app.schemas.admin import ReviewSubmissionRequest
 from app.services.auth import get_current_user
+from app.services.wallet import credit_wallet
 
 router = APIRouter(prefix="/api/admin", tags=["admin"])
 
@@ -64,6 +65,15 @@ async def review_submission(
         submission.final_amount = body.final_amount
     else:
         submission.final_amount = submission.quoted_amount
+
+    if new_status == CardSubmissionStatus.APPROVED:
+        await credit_wallet(
+            db,
+            user_id=submission.user_id,
+            amount=submission.final_amount,
+            reference=f"submission-{submission.id}",
+            description=f"Card sale approved",
+        )
 
     await db.commit()
     await db.refresh(submission)
