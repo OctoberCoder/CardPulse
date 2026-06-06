@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cardpulse/api/client.dart';
 import 'package:cardpulse/screens/login_screen.dart';
 import 'package:cardpulse/screens/register_screen.dart';
 import 'package:cardpulse/screens/dashboard_screen.dart';
 import 'package:cardpulse/screens/sell_card_screen.dart';
 import 'package:cardpulse/screens/wallet_screen.dart';
 import 'package:cardpulse/screens/brands_screen.dart';
+
 final _router = GoRouter(
   initialLocation: '/login',
   routes: [
@@ -20,6 +23,9 @@ final _router = GoRouter(
 );
 
 void main() {
+  if (kIsWeb) {
+    ApiClient().setWebBaseUrl();
+  }
   runApp(const ProviderScope(child: CardPulseApp()));
 }
 

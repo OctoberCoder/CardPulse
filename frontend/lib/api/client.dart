@@ -39,6 +39,10 @@ class ApiClient {
     return response.data;
   }
 
+  void setWebBaseUrl() {
+    _dio.options.baseUrl = 'http://localhost:8000/api';
+  }
+
   Map<String, String>? _authHeader(String? token) =>
       token != null ? {'Authorization': 'Bearer $token'} : null;
 }
