@@ -11,6 +11,7 @@ from app.schemas.card import (
     CardQuoteRequest, CardQuoteResponse, CardSubmitRequest,
 )
 from app.services.auth import get_current_user
+from app.services.pricing import get_effective_rate
 
 router = APIRouter(tags=["cards"])
 
@@ -67,7 +68,6 @@ async def quote_card(
     brand = result.scalar_one_or_none()
     if not brand:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Brand not found")
-    buy_rate = 0.75
     result = await db.execute(
         select(Denomination).where(
             Denomination.id == body.denomination_id,
@@ -77,6 +77,7 @@ async def quote_card(
     denom = result.scalar_one_or_none()
     if not denom:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Denomination not found")
+    buy_rate, sell_price = await get_effective_rate(db, body.brand_id, body.denomination_id, denom.value)
     quoted_amount = round(denom.value * buy_rate, 2)
     return CardQuoteResponse(quoted_amount=quoted_amount, buy_rate=buy_rate)
 
