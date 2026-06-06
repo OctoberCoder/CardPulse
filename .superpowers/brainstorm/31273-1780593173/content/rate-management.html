@@ -1,0 +1,58 @@
+<h2>Admin: Rate Management Dashboard</h2>
+<p class="subtitle">Control buy/sell rates, automatic adjustments</p>
+
+<div class="mockup">
+  <div class="mockup-header">Rate Management</div>
+  <div class="mockup-body" style="text-align:left;padding:20px;">
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <div class="mock-input" style="flex:1;">Search brand...</div>
+      <div class="mock-input" style="width:120px;">All Regions ▼</div>
+      <div class="mock-input" style="width:120px;">Only Active</div>
+      <button class="mock-button">+ Add Brand</button>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 80px;gap:8px;padding:8px 0;border-bottom:1px solid #333;font-size:12px;color:#888;">
+        <span>Brand</span><span>$25</span><span>$50</span><span>$100</span><span>$200</span><span>Status</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 80px;gap:8px;padding:12px 0;border-bottom:1px solid #222;">
+        <span><strong>Amazon</strong><br><span style="font-size:12px;color:#666;">Buy 78% | Sell 92%</span></span>
+        <span>80%</span><span>78%</span><span>76%</span><span>74%</span>
+        <span style="color:#4ade80;">Active</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 80px;gap:8px;padding:12px 0;border-bottom:1px solid #222;">
+        <span><strong>Apple</strong><br><span style="font-size:12px;color:#666;">Buy 75% | Sell 90%</span></span>
+        <span>77%</span><span>75%</span><span>73%</span><span>70%</span>
+        <span style="color:#4ade80;">Active</span>
+      </div>
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 80px;gap:8px;padding:12px 0;">
+        <span><strong>Google Play</strong><br><span style="font-size:12px;color:#666;">Buy 70% | Sell 88%</span></span>
+        <span>72%</span><span>70%</span><span>68%</span><span>65%</span>
+        <span style="color:#fbbf24;">Paused</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Dynamic Rate Rules</h3>
+  <div class="mockup">
+    <div class="mockup-body" style="text-align:left;padding:20px;">
+      <div style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:#1a1a2e;border-radius:6px;margin-bottom:8px;">
+          <div>
+            <strong>Amazon $100</strong><br>
+            <span style="font-size:13px;color:#666;">Base buy rate: 76% | If stock &lt; 10 → +2% | If stock &gt; 50 → -3%</span>
+          </div>
+          <button class="mock-button" style="padding:4px 12px;font-size:12px;">Edit</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:#1a1a2e;border-radius:6px;">
+          <div>
+            <strong>Apple $50</strong><br>
+            <span style="font-size:13px;color:#666;">Base buy rate: 75% | If submissions &gt; 20/day → -2%</span>
+          </div>
+          <button class="mock-button" style="padding:4px 12px;font-size:12px;">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

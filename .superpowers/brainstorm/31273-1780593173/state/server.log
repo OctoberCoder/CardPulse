@@ -1,0 +1,6 @@
+{"type":"server-started","port":58931,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:58931","screen_dir":"/Users/igeorge/CardPulse/.superpowers/brainstorm/31273-1780593173/content","state_dir":"/Users/igeorge/CardPulse/.superpowers/brainstorm/31273-1780593173/state"}
+{"type":"screen-added","file":"/Users/igeorge/CardPulse/.superpowers/brainstorm/31273-1780593173/content/architecture.html"}
+{"type":"screen-added","file":"/Users/igeorge/CardPulse/.superpowers/brainstorm/31273-1780593173/content/buying-flow.html"}
+{"type":"screen-added","file":"/Users/igeorge/CardPulse/.superpowers/brainstorm/31273-1780593173/content/selling-flow.html"}
+{"type":"screen-added","file":"/Users/igeorge/CardPulse/.superpowers/brainstorm/31273-1780593173/content/rate-management.html"}
+{"type":"server-stopped","reason":"idle timeout"}

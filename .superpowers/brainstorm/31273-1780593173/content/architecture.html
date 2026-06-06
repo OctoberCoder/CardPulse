@@ -1,0 +1,107 @@
+<h2>CardPulse System Architecture</h2>
+<p class="subtitle">Django DRF + Svelte SPA — Monorepo with separate apps</p>
+
+<div class="section">
+  <h3>Overall Layout</h3>
+  <div style="display:flex; gap: 24px; margin-top: 16px; flex-wrap: wrap;">
+    <div class="mockup" style="flex:1; min-width:400px;">
+      <div class="mockup-header">User-Facing Portal (Svelte SPA)</div>
+      <div class="mockup-body" style="text-align:left;">
+        <div style="background:#1a1a2e;color:#e0e0ff;padding:12px;border-radius:8px;margin:8px 0;">
+          <strong>Guest Routes</strong><br>
+          Landing · Sign Up / Login · Browse Cards
+        </div>
+        <div style="background:#16213e;color:#e0e0ff;padding:12px;border-radius:8px;margin:8px 0;">
+          <strong>User Dashboard</strong><br>
+          Sell Card · Buy Card · My Transactions · Wallet
+        </div>
+        <div style="background:#0f3460;color:#e0e0ff;padding:12px;border-radius:8px;margin:8px 0;">
+          <strong>Admin Panel</strong><br>
+          Manage Rates · Users · Disputes · Payouts
+        </div>
+      </div>
+    </div>
+
+    <div class="mockup" style="flex:1; min-width:400px;">
+      <div class="mockup-header">Backend API (Django + DRF)</div>
+      <div class="mockup-body" style="text-align:left;">
+        <div style="background:#1a1a2e;color:#e0e0ff;padding:12px;border-radius:8px;margin:8px 0;">
+          <strong>Auth Service</strong><br>
+          JWT Auth · OAuth · KYC Verification
+        </div>
+        <div style="background:#16213e;color:#e0e0ff;padding:12px;border-radius:8px;margin:8px 0;">
+          <strong>Card Service</strong><br>
+          Listings · Rates Engine · Inventory
+        </div>
+        <div style="background:#0f3460;color:#e0e0ff;padding:12px;border-radius:8px;margin:8px 0;">
+          <strong>Transaction Service</strong><br>
+          Orders · Payments · Payouts
+        </div>
+        <div style="background:#1a1a2e;color:#e0e0ff;padding:12px;border-radius:8px;margin:8px 0;">
+          <strong>Dispute Service</strong><br>
+          Claims · Resolution · Refunds
+        </div>
+        <div style="background:#16213e;color:#e0e0ff;padding:12px;border-radius:8px;margin:8px 0;">
+          <strong>Notification Service</strong><br>
+          Email · In-app · SMS
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Data Flow</h3>
+  <div style="display:flex; flex-direction: column; gap: 12px; margin-top: 16px;">
+    <div class="mockup" style="width:100%;">
+      <div class="mockup-header">How a Card Sell Transaction Flows</div>
+      <div class="mockup-body" style="text-align:left; font-size:14px;">
+        <div style="padding:8px; border-bottom:1px solid #333;">
+          1. <strong>User submits card</strong> → POST /api/cards/submit (brand, code, denomination)
+        </div>
+        <div style="padding:8px; border-bottom:1px solid #333;">
+          2. <strong>Rate engine quotes price</strong> → dynamic rate from brand/denom table
+        </div>
+        <div style="padding:8px; border-bottom:1px solid #333;">
+          3. <strong>User accepts quote</strong> → card locked, admin verification step
+        </div>
+        <div style="padding:8px; border-bottom:1px solid #333;">
+          4. <strong>Admin approves</strong> → card balance confirmed, payment queued
+        </div>
+        <div style="padding:8px;">
+          5. <strong>User receives payout</strong> → wallet balance updated / bank transfer triggered
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Tech Stack</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;">
+    <div class="mock-card" style="background:#1a1a2e;color:#e0e0ff;padding:12px;border-radius:8px;flex:1;min-width:160px;">
+      <strong>Backend</strong><br>
+      Django 5.x + DRF<br>
+      Celery + Redis<br>
+      PostgreSQL
+    </div>
+    <div class="mock-card" style="background:#16213e;color:#e0e0ff;padding:12px;border-radius:8px;flex:1;min-width:160px;">
+      <strong>Frontend</strong><br>
+      SvelteKit SPA<br>
+      Tailwind CSS<br>
+      Axios / SWR
+    </div>
+    <div class="mock-card" style="background:#0f3460;color:#e0e0ff;padding:12px;border-radius:8px;flex:1;min-width:160px;">
+      <strong>Infra</strong><br>
+      Docker Compose<br>
+      Nginx (Django)<br>
+      Vercel (Svelte)
+    </div>
+    <div class="mock-card" style="background:#1a1a2e;color:#e0e0ff;padding:12px;border-radius:8px;flex:1;min-width:160px;">
+      <strong>Payments</strong><br>
+      Stripe (cards)<br>
+      Paystack/Flutterwave<br>
+      Crypto (USDT)
+    </div>
+  </div>
+</div>
