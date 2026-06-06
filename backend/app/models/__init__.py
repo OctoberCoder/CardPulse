@@ -7,6 +7,7 @@ from .reloadly import ReloadlyProduct, ReloadlyTransaction, ReloadlyTransactionS
 from .order import Order, OrderStatus, PaymentMethod
 from .fraud import FraudAlert, FraudSeverity, FraudAlertStatus
 from .notification import Notification, NotificationType
+from .dispute import Dispute, DisputeStatus, DisputeResolution
 
 __all__ = ["Base", "User", "UserTier", "KYCStatus", "CardBrand", "Denomination",
            "CardSubmission", "CardSubmissionStatus", "Wallet", "WalletTransaction", "TransactionType",
@@ -14,4 +15,5 @@ __all__ = ["Base", "User", "UserTier", "KYCStatus", "CardBrand", "Denomination",
            "ReloadlyProduct", "ReloadlyTransaction", "ReloadlyTransactionStatus",
            "Order", "OrderStatus", "PaymentMethod",
            "FraudAlert", "FraudSeverity", "FraudAlertStatus",
-           "Notification", "NotificationType"]
+           "Notification", "NotificationType",
+           "Dispute", "DisputeStatus", "DisputeResolution"]
