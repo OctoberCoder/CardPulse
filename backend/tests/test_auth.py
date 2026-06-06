@@ -83,3 +83,11 @@ async def test_get_me_authenticated(client: AsyncClient):
 async def test_get_me_unauthenticated(client: AsyncClient):
     response = await client.get("/api/auth/me")
     assert response.status_code == 401
+
+
+@pytest.mark.asyncio
+async def test_rate_limit_exceeded(client: AsyncClient):
+    for _ in range(6):
+        await client.post("/api/auth/login", json={"email": "x@y.com", "password": "x"})
+    response = await client.post("/api/auth/login", json={"email": "x@y.com", "password": "x"})
+    assert response.status_code == 429

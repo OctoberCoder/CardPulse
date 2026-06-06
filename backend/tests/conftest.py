@@ -28,6 +28,9 @@ async def db_session():
 
 @pytest.fixture
 async def client(db_session):
+    from app.main import limiter as main_limiter
+    from app.routers.auth import limiter as auth_limiter
+
     async def override_get_db():
         yield db_session
 
@@ -36,3 +39,5 @@ async def client(db_session):
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
         yield ac
     app.dependency_overrides.clear()
+    main_limiter.reset()
+    auth_limiter.reset()
