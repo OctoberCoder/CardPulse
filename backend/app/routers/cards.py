@@ -11,6 +11,7 @@ from app.schemas.card import (
     CardQuoteRequest, CardQuoteResponse, CardSubmitRequest,
 )
 from app.services.auth import get_current_user
+from app.services.encryption import encrypt
 from app.services.pricing import get_effective_rate
 
 router = APIRouter(tags=["cards"])
@@ -92,7 +93,7 @@ async def submit_card(
         user_id=current_user.id,
         brand_id=body.brand_id,
         denomination_id=body.denomination_id,
-        card_code=body.card_code,
+        card_code=encrypt(body.card_code),
         card_image_url=body.card_image_url,
         quoted_amount=body.quoted_amount,
         status=CardSubmissionStatus.PENDING,
