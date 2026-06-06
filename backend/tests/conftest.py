@@ -60,3 +60,43 @@ async def admin_token(db_session):
         await db_session.commit()
         await db_session.refresh(user)
     return create_access_token(user.id)
+
+
+@pytest.fixture
+async def user_token(db_session):
+    from app.services.auth import create_access_token, hash_password
+    result = await db_session.execute(select(User).where(User.email == "user@test.com"))
+    user = result.scalar_one_or_none()
+    if not user:
+        user = User(
+            email="user@test.com",
+            password_hash=hash_password("UserPass123!"),
+            phone="+2348011111111",
+        )
+        db_session.add(user)
+        await db_session.commit()
+        await db_session.refresh(user)
+    return create_access_token(user.id)
+
+
+@pytest.fixture
+async def pending_submission(db_session, admin_token):
+    from app.models.card import CardBrand, Denomination, CardSubmission, CardSubmissionStatus
+    from app.models.user import User
+    from app.services.auth import create_access_token
+    result = await db_session.execute(select(User).where(User.email == "admin@test.com"))
+    admin_user = result.scalar_one()
+    brand = CardBrand(name="Test Brand", slug="test-brand")
+    db_session.add(brand)
+    await db_session.commit()
+    denom = Denomination(brand_id=brand.id, value=100.0)
+    db_session.add(denom)
+    await db_session.commit()
+    sub = CardSubmission(
+        user_id=admin_user.id, brand_id=brand.id, denomination_id=denom.id,
+        card_code="test-code", quoted_amount=75.0,
+        status=CardSubmissionStatus.PENDING,
+    )
+    db_session.add(sub)
+    await db_session.commit()
+    return sub.id
