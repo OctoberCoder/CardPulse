@@ -51,7 +51,9 @@ docker compose logs -f           # follow logs
 
 ## Project Status
 
-- **Phase 1** (in progress): Backend scaffolding, auth, card buying flow, wallet, admin
+- **Phase 1** (complete ✅): Backend scaffolding, auth with JWT, card brands/submissions API, admin review flow, wallet with auto-credit on approval, SQLAdmin panel, rate limiting, 18 passing tests
+- **Phase 2**: Pricing engine, Reloadly integration | **Phase 3**: Payments (Paystack/Flutterwave)
+- **Phase 4**: Flutter frontend | **Phase 5+**: KYC, disputes, admin custom screens, Hermes AI agent
 - **Phase 2**: Pricing engine, Reloadly integration
 - **Phase 3**: Payments (Paystack/Flutterwave)
 - **Phase 4**: Flutter frontend
