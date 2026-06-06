@@ -3,7 +3,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from app.config import get_settings
-from app.routers import auth, cards, admin, wallet, pricing, products, orders, webhooks
+from app.routers import auth, cards, admin, wallet, pricing, products, orders, webhooks, notifications
 from app.admin_setup import setup_admin
 
 settings = get_settings()
@@ -22,6 +22,7 @@ app.include_router(pricing.router)
 app.include_router(products.router)
 app.include_router(orders.router)
 app.include_router(webhooks.router)
+app.include_router(notifications.router)
 
 @app.get("/health")
 async def health():
