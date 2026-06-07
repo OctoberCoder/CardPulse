@@ -7575,7 +7575,7 @@ xp:function xp(a){this.a=a},
 mh:function mh(a){this.a=a},
 Jt:function Jt(a){this.a=a},
 a_P:function a_P(){},
-aAg(){var s=A.aKy("http://10.0.2.2:8000/api",B.F3),r=new A.M4(A.c([B.Ca],t.i6))
+aAg(){var s=A.aKy("https://cardpulse-production-2d54.up.railway.app/api",B.F3),r=new A.M4(A.c([B.Ca],t.i6))
 r.M(r,B.ID)
 r=new A.a26($,r,$,new A.a5p(51200),!1)
 r.dx$=s
