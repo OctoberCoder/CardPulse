@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -10,6 +11,19 @@ settings = get_settings()
 limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI(title=settings.app_name, version="0.1.0", debug=settings.debug)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://octobercoder.github.io",
+        "http://localhost:8000",
+        "http://localhost:5000",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 setup_admin(app)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
