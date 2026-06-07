@@ -29,9 +29,17 @@ def do_run_migrations(connection: Connection) -> None:
         context.run_migrations()
 
 
+def _get_async_url() -> str:
+    """Convert Railway's postgresql:// DATABASE_URL to postgresql+asyncpg://."""
+    url = get_settings().database_url
+    if url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    return url
+
+
 async def run_async_migrations() -> None:
     from sqlalchemy.ext.asyncio import create_async_engine as create_ae
-    connectable = create_ae(get_settings().database_url)
+    connectable = create_ae(_get_async_url())
     async with connectable.connect() as connection:
         await connection.run_sync(do_run_migrations)
     await connectable.dispose()
