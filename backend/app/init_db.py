@@ -15,7 +15,7 @@ async def init():
     print("✅ Database tables created")
 
     async with async_session() as db:
-        result = await db.execute(select(User).limit(1))
+        result = await db.execute(select(User).where(User.email == "admin@cardpulse.com"))
         if result.scalar_one_or_none():
             print("✅ Data already seeded, skipping")
             return
