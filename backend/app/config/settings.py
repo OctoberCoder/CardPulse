@@ -34,6 +34,9 @@ class Settings(BaseSettings):
     reloadly_environment: str = "sandbox"
     paystack_secret_key: str = ""
     flutterwave_secret_key: str = ""
+    mailgun_api_key: str = ""
+    mailgun_domain: str = ""
+    mailgun_sender_email: str = "noreply@cardpulse.publicvm.com"
     class Config:
         env_file = ".env"
 
