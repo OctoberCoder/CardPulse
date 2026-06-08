@@ -15,6 +15,7 @@ app = FastAPI(title=settings.app_name, version="0.1.0", debug=settings.debug)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://app.cardpulse.publicvm.com",
         "https://octobercoder.github.io",
         "http://localhost:8000",
         "http://localhost:5000",
