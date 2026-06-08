@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Card Sale Approved - CardPulse{% endblock %}
+{% block content %}
+<p>Your <strong>{{ brand_name }}</strong> gift card sale has been approved!</p>
+<p style="font-size:20px;color:#10b981;font-weight:bold;text-align:center;padding:16px;background:#064e3b;border-radius:8px;">
+  {{ format_amount(amount) }} added to your wallet
+</p>
+<p>The funds are available for withdrawal or to purchase other gift cards.</p>
+{% endblock %}

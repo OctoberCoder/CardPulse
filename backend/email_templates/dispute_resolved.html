@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Dispute Resolved - CardPulse{% endblock %}
+{% block content %}
+<p>Dispute <strong>#{{ dispute_id }}</strong> has been resolved.</p>
+{% if outcome %}
+<p>Outcome: {{ outcome }}</p>
+{% endif %}
+<p>Thank you for your patience during the review process.</p>
+{% endblock %}

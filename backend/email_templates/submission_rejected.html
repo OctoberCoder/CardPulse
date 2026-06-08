@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Card Submission Update - CardPulse{% endblock %}
+{% block content %}
+<p>Your <strong>{{ brand_name }}</strong> gift card submission was not approved.</p>
+{% if reason %}
+<p>Reason: {{ reason }}</p>
+{% endif %}
+<p>If you have questions, please contact support.</p>
+{% endblock %}
