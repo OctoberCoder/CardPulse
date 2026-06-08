@@ -44,6 +44,10 @@ def send_email_task(notification_id: int, template_name: str, context: dict, to_
     async def _send_and_mark():
         success = await service.send(to_email, subject, html)
         if not success:
+            logger.warning(
+                "Failed to send email: notification_id=%s template=%s to=%s",
+                notification_id, template_name, to_email,
+            )
             return False
         async with async_session() as db:
             notif = await db.get(Notification, notification_id)
