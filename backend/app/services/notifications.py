@@ -17,17 +17,21 @@ async def create_notification(
     message: str,
     dedupe_key: str | None = None,
 ) -> Notification:
-    notif = Notification(
-        user_id=user_id,
-        type=type_,
-        title=title,
-        message=message,
-        dedupe_key=dedupe_key,
-    )
-    db.add(notif)
-    await db.commit()
-    await db.refresh(notif)
-    return notif
+    try:
+        notif = Notification(
+            user_id=user_id,
+            type=type_,
+            title=title,
+            message=message,
+            dedupe_key=dedupe_key,
+        )
+        db.add(notif)
+        await db.commit()
+        await db.refresh(notif)
+        return notif
+    except Exception:
+        logger.exception("Failed to create notification for user=%s type=%s dedupe_key=%s", user_id, type_, dedupe_key)
+        raise
 
 
 async def notify_user(
@@ -36,7 +40,7 @@ async def notify_user(
     notif_type: NotificationType,
     title: str,
     message: str,
-    dedupe_key: str,
+    dedupe_key: str | None,
     email_template: str | None = None,
     email_context: dict | None = None,
 ) -> Notification | None:
@@ -82,7 +86,7 @@ async def notify_submission_approved(db: AsyncSession, submission) -> Notificati
         NotificationType.SUBMISSION_APPROVED,
         "Card Sale Approved",
         f"Your gift card was approved! ${submission.final_amount:.2f} added to your wallet.",
-        dedupe_key=f"submission:{submission.id}",
+        dedupe_key=f"submission:{submission.id}:approved",
         email_template="submission_approved",
         email_context={
             "amount": submission.final_amount,
@@ -98,7 +102,7 @@ async def notify_submission_rejected(db: AsyncSession, submission) -> Notificati
         NotificationType.SUBMISSION_REJECTED,
         "Card Sale Rejected",
         f"Your gift card submission was not approved: {reason}",
-        dedupe_key=f"submission:{submission.id}",
+        dedupe_key=f"submission:{submission.id}:rejected",
         email_template="submission_rejected",
         email_context={
             "brand_name": submission.brand.name if hasattr(submission, 'brand') and submission.brand else "Gift Card",
