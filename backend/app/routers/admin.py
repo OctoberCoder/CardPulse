@@ -11,6 +11,7 @@ from app.schemas.card import CardSubmissionResponse
 from app.schemas.admin import ReviewSubmissionRequest
 from app.services.auth import get_current_user
 from app.services.wallet import credit_wallet
+from app.services.notifications import notify_submission_approved, notify_submission_rejected
 
 router = APIRouter(prefix="/api/admin", tags=["admin"])
 
@@ -77,4 +78,10 @@ async def review_submission(
 
     await db.commit()
     await db.refresh(submission)
+
+    if new_status == CardSubmissionStatus.APPROVED:
+        await notify_submission_approved(db, submission)
+    elif new_status == CardSubmissionStatus.REJECTED:
+        await notify_submission_rejected(db, submission)
+
     return submission
